@@ -7,6 +7,13 @@ from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from typing import List  # noqa: F401
+from colors import special, colors
+
+def get_text_color(hex_str):
+    hex_str = hex_str[1:]
+    (r, g, b) = (hex_str[:2], hex_str[2:4], hex_str[4:])
+    return colors[-1] if 1 - (int(r, 16) * 0.299 + int(g, 16) * 0.587 + int(b, 16) * 0.114) / 255 < 0.5 else '#ffffff'
+
 
 mod = "mod4"                                     # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"                             # My terminal of choice
@@ -243,13 +250,13 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 2,
                 "margin": 6,
-                "border_focus": "e1acff",
-                "border_normal": "1D2330"
+                "border_focus": colors[0],
+                "border_normal": colors[-1]
                 }
 
 layouts = [
     #layout.MonadWide(**layout_theme),
-    #layout.Bsp(**layout_theme),
+    layout.Bsp(**layout_theme),
     #layout.Stack(stacks=2, **layout_theme),
     #layout.Columns(**layout_theme),
     #layout.RatioTile(**layout_theme),
@@ -276,7 +283,7 @@ layouts = [
          ),
     layout.Floating(**layout_theme)
 ]
-
+'''
 colors = [["#292d3e", "#292d3e"], # panel background
           ["#434758", "#434758"], # background for current screen tab
           ["#ffffff", "#ffffff"], # font color for group names
@@ -284,15 +291,19 @@ colors = [["#292d3e", "#292d3e"], # panel background
           ["#8d62a9", "#8d62a9"], # border line color for other tab and odd widgets
           ["#668bd7", "#668bd7"], # color for the even widgets
           ["#e1acff", "#e1acff"]] # window name
+'''
+
+
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
     font="Caskaydia Cove Nerd Font Mono",
-    fontsize = 12,
+    fontsize = 13,
     padding = 2,
-    background=colors[2]
+    background=special["background"],
+    foreground=special["foreground"]
 )
 extension_defaults = widget_defaults.copy()
 
@@ -301,78 +312,83 @@ def init_widgets_list():
               widget.Sep(
                        linewidth = 0,
                        padding = 6,
-                       foreground = colors[2],
-                       background = colors[0]
-                       ),
-              widget.Image(
-                       filename = "~/.config/qtile/icons/python.png",
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('dmenu_run')}
+                       foreground = colors[2]
                        ),
               widget.GroupBox(
                        font = "Caskaydia Cove Nerd Font Mono",
                        fontsize = 12,
                        margin_y = 3,
-                       margin_x = 0,
+                       margin_x = 3,
                        padding_y = 5,
                        padding_x = 3,
                        borderwidth = 3,
                        active = colors[2],
-                       inactive = colors[2],
+                       inactive = colors[4],
                        rounded = False,
-                       highlight_color = colors[1],
+                       highlight_color = colors[-2],
                        highlight_method = "line",
                        this_current_screen_border = colors[3],
                        this_screen_border = colors [4],
-                       other_current_screen_border = colors[0],
-                       other_screen_border = colors[0],
-                       foreground = colors[2],
-                       background = colors[0]
+                       other_current_screen_border = colors[-3],
+                       other_screen_border = colors[-3],
+                       foreground = colors[-2],
                        ),
               widget.Prompt(
                        prompt = prompt,
                        font = "Caskaydia Cove Nerd Font Mono",
                        padding = 10,
                        foreground = colors[3],
-                       background = colors[1]
                        ),
               widget.Sep(
                        linewidth = 0,
                        padding = 40,
                        foreground = colors[2],
-                       background = colors[0]
                        ),
               widget.WindowName(
                        foreground = colors[6],
-                       background = colors[0],
                        ),
               widget.Sep(
                        linewidth = 0,
                        foreground = colors[2],
-                       background = colors[0]
+                       ),
+              widget.TextBox(
+                       text = u'\ue0ba',
+                       foreground = colors[1],
+                       fontsize = 32,
+                       padding=0
                        ),
               widget.Systray(
-                       background = colors[0],
+                       background = colors[1],
                        padding = 5
                        ),
               widget.TextBox(
                        text = u'\ue0bc',
-                       foreground = colors[0],
-                       background = colors[4],
+                       foreground = colors[1],
+                       background = colors[2],
                        fontsize = 32,
                        padding=0
                        ),
               widget.TextBox(
                        text = '🌀',
-                       foreground = colors[4],
-                       background = colors[4],
+                       background = colors[2],
                        fontsize = 22
                        ),
               widget.CheckUpdates(
                        update_interval = 1800,
-                       foreground = colors[2],
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e sudo pacman -Syu')},
-                       background = colors[4],
-                       fontsize=12
+                       custom_command = 'yay -Qu',
+                       colour_have_updates = get_text_color(colors[2]),
+                       colour_no_updates = get_text_color(colors[2]),
+                       #display_format = '{updates} Updates',
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e yay -Syu')},
+                       background = colors[2],
+                       foreground = get_text_color(colors[2])
+                       ),
+              widget.TextBox(
+                       text = u'\ue0ba',
+                       foreground = colors[3],
+                       background = colors[2],
+                       fontsize = 32,
+                       padding=0
                        ),
               widget.Battery(
                        format='{char}{percent:2.0%} {hour:d}:{min:02d}',
@@ -380,10 +396,28 @@ def init_widgets_list():
                        discharge_char="🔋",
                        full_char="👌",
                        empty_char="❌",
-                       update_interval = 1000,
-                       foreground = colors[2],
+                       update_interval = 30,
+                       foreground = get_text_color(colors[3]),
+                       background = colors[3]
+                       ),
+              widget.TextBox(
+                       text = "\ue0ba",
+                       foreground = colors[4],
+                       background = colors[3],
+                       fontsize = 28,
+                       padding=0
+                       ),
+              widget.TextBox(
+                        text="👾",
+                        foreground = colors[2],
+                        background = colors[4],
+                        fontsize = 14
+                      ),
+              widget.Memory(
+                       foreground = get_text_color(colors[4]),
                        background = colors[4],
-                       fontsize=14
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop')},
+                       padding = 5
                        ),
               widget.TextBox(
                        text = "\ue0ba",
@@ -393,60 +427,36 @@ def init_widgets_list():
                        padding=0
                        ),
               widget.TextBox(
-                        text="👾",
-                        foreground = colors[2],
-                        background = colors[5],
-                        fontsize = 14
-                      ),
-              widget.Memory(
-                       foreground = colors[2],
-                       background = colors[5],
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop')},
-                       padding = 5
-                       ),
-              widget.Net(
-                       interface = "wlp2s0",
-                       format = '{down} ↓↑ {up}',
-                       foreground = colors[2],
-                       background = colors[4],
-                       padding = 5
-                       ),
-              widget.TextBox(
                       text = " Vol:",
-                       foreground = colors[2],
+                       foreground = get_text_color(colors[5]),
                        background = colors[5],
                        padding = 0
                        ),
               widget.Volume(
-                       foreground = colors[2],
+                       foreground = get_text_color(colors[5]),
                        background = colors[5],
                        padding = 5
                        ),
               widget.TextBox(
                        text = '\ue0ba',
                        background = colors[5],
-                       foreground = colors[4],
+                       foreground = colors[6],
                        padding = 0,
                        fontsize = 37
                        ),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                        foreground = colors[0],
-                       background = colors[4],
+                       background = colors[6],
                        padding = 0,
                        scale = 0.7
                        ),
               widget.Clock(
-                       foreground = colors[2],
-                       background = colors[4],
-                       format = " %H:%M "
+                       foreground = get_text_color(colors[6]),
+                       background = colors[6],
+                       format = " %H:%M ",
+                       fontsize = 16
                        # format = "%A, %B %d  [ %H:%M ]"
-                       ),
-              widget.Sep(
-                       linewidth = 0,
-                       padding = 10,
-                       foreground = colors[0],
-                       background = colors[4]
                        )
               ]
     return widgets_list
