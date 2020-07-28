@@ -92,6 +92,7 @@ source ~/.cache/wal/colors-tty.sh
 wall-scale() {
     wal -n -i "$@" --backend colorz
     feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
+    betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")"
 }
 
 # Load syntax highlighting; should be last.
