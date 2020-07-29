@@ -22,7 +22,7 @@ myConfig = "/home/dt/.config/qtile/config.py"    # The Qtile config file locatio
 keys = [
          ### The essentials
          Key([mod], "Return",
-             lazy.spawn(myTerm),
+             lazy.spawn(myTerm + " -e fish"),
              desc='Launches My Terminal'
              ),
          Key([mod, "shift"], "Return",
@@ -183,8 +183,8 @@ keys = [
              desc='lynx browser'
              ),
          Key([mod, "mod1"], "l",
-             lazy.spawn(myTerm+" -e lynx gopher://distro.tube"),
-             desc='lynx browser'
+                 lazy.spawn(myTerm+" -e lynx http://google.com"),
+                desc='lynx browser'
              ),
          Key([mod, "mod1"], "n",
              lazy.spawn(myTerm+" -e newsboat"),
@@ -227,20 +227,18 @@ keys = [
              desc='youtube-viewer'
              ),
          Key([mod, "mod1"], "a",
-             lazy.spawn(myTerm+" -e ncpamixer"),
-             desc='ncpamixer'
+             lazy.spawn(myTerm+" -e pulsemixer"),
+             desc='pulsemixer'
              ),
 ]
 
-group_names = [("TTY", {'layout': 'monadtall'}),
-               ("WWW", {'layout': 'monadtall'}),
-               ("DEV", {'layout': 'monadtall'}),
-               ("SYS", {'layout': 'monadtall'}),
-               ("DOC", {'layout': 'monadtall'}),
-               ("CHAT", {'layout': 'monadtall'}),
-               ("MUS", {'layout': 'monadtall'}),
-               ("VID", {'layout': 'monadtall'}),
-               ("GFX", {'layout': 'floating'})]
+group_names = [("\ue795", {'layout': 'monadtall'}),
+               ("\uf269", {'layout': 'monadtall'}),
+               ("\ufb0f", {'layout': 'monadtall'}),
+               ("\uf7c9", {'layout': 'monadtall'}),
+               ("\uf308", {'layout': 'monadtall'}),
+               ("\uf1bc", {'layout': 'monadtall'}),
+               ("\uf719", {'layout': 'monadtall'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -248,7 +246,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
-layout_theme = {"border_width": 2,
+layout_theme = {
+                "border_width": 4,
                 "margin": 6,
                 "border_focus": colors[0],
                 "border_normal": colors[-1]
@@ -268,7 +267,7 @@ layouts = [
     layout.Tile(shift_windows=True, **layout_theme),
     layout.Stack(num_stacks=2),
     layout.TreeTab(
-         font = "Caskaydia Cove Nerd Font Mono",
+         font = "FantasqueSansMono Nerd Font",
          fontsize = 13,
          sections = ["FIRST", "SECOND"],
          section_fontsize = 12,
@@ -309,6 +308,18 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
+              widget.Clock(
+                       foreground = get_text_color(colors[6]),
+                       background = colors[6],
+                       format = " %H:%M ",
+                       fontsize = 16
+                       ),
+              widget.TextBox(
+                       text = u'\ue0bc',
+                       foreground = colors[6],
+                       fontsize = 32,
+                       padding=0
+                       ),
               widget.Sep(
                        linewidth = 0,
                        padding = 6,
@@ -316,11 +327,11 @@ def init_widgets_list():
                        ),
               widget.GroupBox(
                        font = "Caskaydia Cove Nerd Font Mono",
-                       fontsize = 12,
+                       fontsize = 30,
                        margin_y = 3,
                        margin_x = 3,
-                       padding_y = 5,
-                       padding_x = 3,
+                       padding_y = 6,
+                       padding_x = 6,
                        borderwidth = 3,
                        active = colors[1],
                        inactive = colors[4],
@@ -454,9 +465,8 @@ def init_widgets_list():
               widget.Clock(
                        foreground = get_text_color(colors[6]),
                        background = colors[6],
-                       format = " %H:%M ",
-                       fontsize = 16
-                       # format = "%A, %B %d  [ %H:%M ]"
+                       fontsize = 16,
+                       format = "%A, %B %d "
                        )
               ]
     return widgets_list
@@ -483,9 +493,9 @@ if __name__ in ["config", "__main__"]:
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
+    Drag([mod, 'shift'], "Button1", lazy.window.set_size_floating(),
          start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front())
+    Click([mod, "mod1"], "Button1", lazy.window.bring_to_front())
 ]
 
 dgroups_key_binder = None

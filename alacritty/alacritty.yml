@@ -117,10 +117,10 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Caskaydia Cove Nerd Font Mono
+    family: Caskaydia Cove Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Book
+    style: Regular
 
   # Bold font face
   bold:
@@ -136,7 +136,7 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Caskaydia Cove Nerd Font Mono
+    family: Caskaydia Cove Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -155,7 +155,7 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    family: Caskaydia Cove Nerd Font Mono
+    family: Caskaydia Cove Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -174,19 +174,19 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    family: Caskaydia Cove Nerd Font Mono
+    family: Caskaydia Cove Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
   # Point size
-  size: 9.0
+  size: 10.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 1
-    y: 1
+    y: 4
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -217,9 +217,9 @@ font:
 # Colors (Tomorrow Night Bright)
 colors:
   # Default colors
-  primary:
-    background: '0x292d3e'
-    foreground: '0xbbc5ff'
+  #  primary:
+  #  background: '0x292d3e'
+  #  foreground: '0xbbc5ff'
 
     # Bright and dim foreground colors
     #
@@ -247,26 +247,26 @@ colors:
     background: '0xbbc5ff'
 
   # Normal colors
-  normal:
-    black:   '0x292d3e'
-    red:     '0xf07178'
-    green:   '0xc3e88d'
-    yellow:  '0xffcb6b'
-    blue:    '0x82aaff'
-    magenta: '0xc792ea'
-    cyan:    '0x89ddff'
-    white:   '0xd0d0d0'
+  #  normal:
+  #  black:   '0x292d3e'
+  #  red:     '0xf07178'
+  #  green:   '0xc3e88d'
+  #  yellow:  '0xffcb6b'
+  #  blue:    '0x82aaff'
+  #  magenta: '0xc792ea'
+  #  cyan:    '0x89ddff'
+  #  white:   '0xd0d0d0'
 
   # Bright colors
-  bright:
-    black:   '0x434758'
-    red:     '0xff8b92'
-    green:   '0xddffa7'
-    yellow:  '0xffe585'
-    blue:    '0x9cc4ff'
-    magenta: '0xe1acff'
-    cyan:    '0xa3f7ff'
-    white:   '0xffffff'
+  # bright:
+  #  black:   '0x434758'
+  #  red:     '0xff8b92'
+  #  green:   '0xddffa7'
+  #  yellow:  '0xffe585'
+  #  blue:    '0x9cc4ff'
+  #  magenta: '0xe1acff'
+  #  cyan:    '0xa3f7ff'
+  #  white:   '0xffffff'
 
   # Dim colors
   #
@@ -322,8 +322,8 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
-# background_opacity: 0.95
+# background_opacity: 1.0
+background_opacity: 0.95
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
