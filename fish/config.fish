@@ -12,6 +12,12 @@ alias ffmpeg "ffmpeg -hide_banner"
 alias vim "nvim"
 alias dmen 'dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
 
+#function fish_greeting
+#	cowfortune -a
+#end
+
+#funcsave fish_greeting
+
 command cat ~/.cache/wal/sequences &
 
 function wall-scale

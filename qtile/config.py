@@ -3,11 +3,22 @@ import os
 import re
 import socket
 import subprocess
-from libqtile.config import Key, Screen, Group, Drag, Click
+from libqtile.config import ScratchPad, DropDown, Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from typing import List  # noqa: F401
 from colors import special, colors
+
+def backlight(action):
+    def f(qtile):
+        brightness = int(float(str(subprocess.run(['xbacklight', '-get'], stdout=subprocess.PIPE).stdout)[2:-4]))
+        if brightness != 1 or action != 'dec':
+            if (brightness > 49 and action == 'dec') \
+                                or (brightness > 39 and action == 'inc'):
+                subprocess.run(['xbacklight', f'-{action}', '10'])
+            else:
+                subprocess.run(['xbacklight', f'-{action}', '1'])
+    return f
 
 def get_text_color(hex_str):
     hex_str = hex_str[1:]
@@ -20,7 +31,15 @@ myTerm = "alacritty"                             # My terminal of choice
 myConfig = "/home/dt/.config/qtile/config.py"    # The Qtile config file location
 
 keys = [
-         ### The essentials
+	Key([mod], "F12", lazy.group["SPD"].dropdown_toggle("terminal")),
+	Key([mod], "F11", lazy.group["SPD"].dropdown_toggle("python")),
+	Key([mod], "F10", lazy.group["SPD"].dropdown_toggle("ranger")),
+        Key([], 'F7', lazy.spawn('xset dpms force off')),
+        Key([], 'XF86MonBrightnessUp',   lazy.function(backlight('inc'))),
+        Key([], 'XF86MonBrightnessDown', lazy.function(backlight('dec'))),
+        Key([], 'XF86AudioMute', lazy.spawn('ponymix toggle')),
+        Key([], 'XF86AudioRaiseVolume', lazy.spawn('ponymix increase 5')),
+        Key([], 'XF86AudioLowerVolume', lazy.spawn('ponymix decrease 5')),
          Key([mod], "Return",
              lazy.spawn(myTerm + " -e fish"),
              desc='Launches My Terminal'
@@ -232,7 +251,8 @@ keys = [
              ),
 ]
 
-group_names = [("\ue795", {'layout': 'monadtall'}),
+group_names = [
+	       ("\ue795", {'layout': 'monadtall'}),
                ("\uf269", {'layout': 'monadtall'}),
                ("\ufb0f", {'layout': 'monadtall'}),
                ("\uf7c9", {'layout': 'monadtall'}),
@@ -241,7 +261,30 @@ group_names = [("\ue795", {'layout': 'monadtall'}),
                ("\uf719", {'layout': 'monadtall'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
-
+groups.append(
+        ScratchPad("SPD",
+            dropdowns = [
+                DropDown("terminal",\
+                        myTerm+" -e fish",\
+                        y = 0.151,\
+                        height = 0.75,\
+                        opacity = 1.0,\
+                        warp_pointer=False),
+                DropDown("python",\
+                        myTerm+" -e python",\
+                        y = 0.151,\
+                        height = 0.75,\
+                        opacity = 1.0,\
+                        warp_pointer=False),
+                DropDown("ranger",\
+                        myTerm+" -e ranger",\
+                        y = 0.151,\
+                        height = 0.75,\
+                        opacity = 1.0,\
+                        warp_pointer=False),
+                ]
+            )
+        )
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
@@ -299,8 +342,8 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
     font="Caskaydia Cove Nerd Font Mono",
-    fontsize = 13,
-    padding = 2,
+    fontsize = 16,
+    padding = 6,
     background=special["background"],
     foreground=special["foreground"]
 )
@@ -308,6 +351,12 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
+              #widget.TextBox(
+              #         text=u'\uf1b6',
+              #         fontsize = 32,
+              #         background = colors[6],
+              #         mouse_callbacks = {'Button1': lambda qtile: lazy.spawn('flatpak run com.valvesoftware.Steam')},
+              #         ),
               widget.Clock(
                        foreground = get_text_color(colors[6]),
                        background = colors[6],
@@ -480,7 +529,7 @@ def init_widgets_screen2():
     return widgets_screen2                       # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=26)),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.85, size=26)),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26)),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=26))]
 
