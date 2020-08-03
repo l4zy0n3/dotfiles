@@ -1,0 +1,13 @@
+{
+    "workbench.colorTheme": "Horizon Italic",
+    "window.menuBarVisibility": "toggle",
+    "editor.fontFamily":  "'JetBrainsMono Nerd Font Mono'",
+    "editor.fontSize": 16,
+    "window.zoomLevel": 1.2,
+    "editor.lineHeight": 24,
+    "editor.letterSpacing": 0.7,
+    "python.languageServer": "Pylance",
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "kite.showWelcomeNotificationOnStartup": false
+}
