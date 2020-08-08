@@ -9,7 +9,7 @@ alias dl "aria2c -x16"
 alias yt "youtube-dl --add-metadata -i"
 alias yta "yt -x -f bestaudio/best"
 alias ffmpeg "ffmpeg -hide_banner"
-alias vim "nvim"
+alias vim "vim"
 alias dmen 'dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
 
 #function fish_greeting

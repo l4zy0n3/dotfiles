@@ -355,8 +355,8 @@ def init_widgets_list():
               #         text=u'\uf1b6',
               #         fontsize = 32,
               #         background = colors[6],
-              #         mouse_callbacks = {'Button1': lambda qtile: lazy.spawn('flatpak run com.valvesoftware.Steam')},
-              #         ),
+              #         mouse_callbacks = {'Button1': lambda qtile: lazy.spawn('firefox')},
+              #        ),
               widget.Clock(
                        foreground = get_text_color(colors[6]),
                        background = colors[6],
@@ -422,6 +422,25 @@ def init_widgets_list():
                        padding = 5
                        ),
               widget.TextBox(
+                       text = u'\ufaa8',
+                       foreground = colors[6],
+                       fontsize = 24,
+                       background = colors[1],
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e nmtui-connect')},
+                       ),
+              widget.TextBox(
+                       text = u'\uf293',
+                       foreground = colors[6],
+                       fontsize = 24,
+                       background = colors[1],
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('bluedevil-wizard')},
+                       ),
+              #widget.Wlan(
+              #          interface="wlp2s0",
+              #          background = colors[1],
+              #          mouse_callbacks = {'Button1': lambda qtile: lazy.spawn(myTerm + ' -e nmtui-connect')},
+              #        ),
+              widget.TextBox(
                        text = u'\ue0bc',
                        foreground = colors[1],
                        background = colors[2],
@@ -431,14 +450,15 @@ def init_widgets_list():
               widget.TextBox(
                        text = '🌀',
                        background = colors[2],
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e yay -Syu')},
                        fontsize = 22
                        ),
               widget.CheckUpdates(
                        update_interval = 1800,
-                       custom_command = 'yay -Qu',
+                       custom_command = 'sudo pacman -Qu',
                        colour_have_updates = get_text_color(colors[2]),
                        colour_no_updates = get_text_color(colors[2]),
-                       #display_format = '{updates} Updates',
+                       display_format = '{updates} Updates',
                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e yay -Syu')},
                        background = colors[2],
                        foreground = get_text_color(colors[2])
