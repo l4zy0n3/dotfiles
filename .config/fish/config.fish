@@ -1,6 +1,6 @@
 set SPACEFISH_CHAR_PREFIX '🔥🔥🔥 '
 # Load aliases and shortcuts if existent.
-alias shut "sudo openrc-shutdown -p now"
+alias shut "sudo shutdown now"
 alias cp "cp -iv"
 alias mv "mv -iv"
 alias rm "rm -vI"
