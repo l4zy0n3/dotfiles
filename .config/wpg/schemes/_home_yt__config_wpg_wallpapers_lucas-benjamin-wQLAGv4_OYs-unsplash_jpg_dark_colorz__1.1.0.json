@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/lucas-benjamin-wQLAGv4_OYs-unsplash.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#c8c1c0",
+        "foreground": "#010101",
+        "cursor": "#010101"
+    },
+    "colors": {
+        "color0": "#c8c1c0",
+        "color1": "#bf2f1c",
+        "color2": "#0587c1",
+        "color3": "#0667ab",
+        "color4": "#556cae",
+        "color5": "#a9649b",
+        "color6": "#b04456",
+        "color7": "#260905",
+        "color8": "#aea8a7",
+        "color9": "#981201",
+        "color10": "#015f89",
+        "color11": "#01487a",
+        "color12": "#254090",
+        "color13": "#8d2e7a",
+        "color14": "#901a2e",
+        "color15": "#010101"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/noemi-macavei-katocz-fSB5tMpXc9Q-unsplash.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#9eb0b0",
+        "foreground": "#0b0b0b",
+        "cursor": "#0b0b0b"
+    },
+    "colors": {
+        "color0": "#9eb0b0",
+        "color1": "#719492",
+        "color2": "#617e78",
+        "color3": "#848a79",
+        "color4": "#679194",
+        "color5": "#83968e",
+        "color6": "#64908e",
+        "color7": "#0b0b0b",
+        "color8": "#958787",
+        "color9": "#2f6a68",
+        "color10": "#255950",
+        "color11": "#4c6631",
+        "color12": "#27686b",
+        "color13": "#36705a",
+        "color14": "#256866",
+        "color15": "#0b0b0b"
+    }
+}

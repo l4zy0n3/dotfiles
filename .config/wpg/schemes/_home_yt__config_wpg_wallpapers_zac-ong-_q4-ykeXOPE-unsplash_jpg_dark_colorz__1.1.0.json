@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/zac-ong-_q4-ykeXOPE-unsplash.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#c8c7c6",
+        "foreground": "#010101",
+        "cursor": "#010101"
+    },
+    "colors": {
+        "color0": "#c8c7c6",
+        "color1": "#c3a79a",
+        "color2": "#c49443",
+        "color3": "#1776aa",
+        "color4": "#487caa",
+        "color5": "#798baa",
+        "color6": "#aa8c90",
+        "color7": "#26211e",
+        "color8": "#aeaead",
+        "color9": "#a6694d",
+        "color10": "#9f6d18",
+        "color11": "#015786",
+        "color12": "#1d588b",
+        "color13": "#3b5a90",
+        "color14": "#914751",
+        "color15": "#010101"
+    }
+}

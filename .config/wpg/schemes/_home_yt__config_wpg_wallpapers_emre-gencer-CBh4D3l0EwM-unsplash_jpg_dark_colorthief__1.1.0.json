@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/emre-gencer-CBh4D3l0EwM-unsplash.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#030405",
+        "foreground": "#dcdedf",
+        "cursor": "#dcdedf"
+    },
+    "colors": {
+        "color0": "#030405",
+        "color1": "#677668",
+        "color2": "#536057",
+        "color3": "#37473f",
+        "color4": "#3b4c4c",
+        "color5": "#2c3736",
+        "color6": "#6a7974",
+        "color7": "#a1a2a3",
+        "color8": "#131c26",
+        "color9": "#77a77a",
+        "color10": "#60886c",
+        "color11": "#3f6451",
+        "color12": "#436b6b",
+        "color13": "#324d4b",
+        "color14": "#7bab9b",
+        "color15": "#dcdedf"
+    }
+}

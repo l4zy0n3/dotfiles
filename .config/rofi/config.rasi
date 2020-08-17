@@ -1,0 +1,10 @@
+/** Configured For Applets **/
+
+configuration {
+  theme: "~/.cache/wal/colors-rofi-light";
+  show-icons:         true;
+  icon-theme:         "Papirus";
+  location: 4;
+  yoffset: -50;
+  xoffset: -480;
+}

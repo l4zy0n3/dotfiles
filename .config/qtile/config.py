@@ -5,20 +5,36 @@ import socket
 import subprocess
 from libqtile.config import ScratchPad, DropDown, Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
-from libqtile import layout, bar, widget, hook
+from libqtile import extension,layout, bar, widget, hook
 from typing import List  # noqa: F401
 from colors import special, colors
 
 def backlight(action):
     def f(qtile):
         brightness = int(float(str(subprocess.run(['xbacklight', '-get'], stdout=subprocess.PIPE).stdout)[2:-4]))
-        if brightness != 1 or action != 'dec':
-            if (brightness > 49 and action == 'dec') \
-                                or (brightness > 39 and action == 'inc'):
-                subprocess.run(['xbacklight', f'-{action}', '10'])
-            else:
-                subprocess.run(['xbacklight', f'-{action}', '1'])
+        if ((brightness == 100 and action == 'inc' ) or (brightness == 1 and action == 'dec' )):
+            pass
+        else:
+            if brightness != 1 or action != 'dec':
+                if (brightness > 49 and action == 'dec') \
+                                    or (brightness > 39 and action == 'inc'):
+                    subprocess.run(['xbacklight', f'-{action}', '10'])
+                elif (brightness > 49 or (brightness < 39 and brightness > 15)):
+                    subprocess.run(['xbacklight', f'-{action}', '5'])
+                else:
+                    subprocess.run(['xbacklight', f'-{action}', '1'])
     return f
+def getVolumeIcon():
+	volume = int(str((subprocess.run(['ponymix', 'get-volume'], stdout=subprocess.PIPE).stdout))[2:-3])
+	isMuted = not bool(subprocess.call(['ponymix', 'is-muted']))
+	if isMuted:
+    		return "🔇"
+	elif volume > 70:
+        	return "🔊"
+	elif volume <= 70 and volume > 35:
+           	return "🔉"
+	else:
+           	return "🔈"
 
 def get_text_color(hex_str):
     hex_str = hex_str[1:]
@@ -28,19 +44,21 @@ def get_text_color(hex_str):
 
 mod = "mod4"                                     # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"                             # My terminal of choice
-myConfig = "/home/dt/.config/qtile/config.py"    # The Qtile config file location
-
+myConfig = "/home/yt/.config/qtile/config.py"    # The Qtile config file location
+myEditor = "kak"
 keys = [
-	Key([mod], "F12", lazy.group["SPD"].dropdown_toggle("terminal")),
-	Key([mod], "F11", lazy.group["SPD"].dropdown_toggle("python")),
-	Key([mod], "F10", lazy.group["SPD"].dropdown_toggle("ranger")),
+	Key([mod], "d", lazy.spawn("rofi -combi-modi window,drun -show combi -modi combi")),
+	Key([mod], "period", lazy.group["SPD"].dropdown_toggle("terminal")),
+	Key([mod], "p", lazy.group["SPD"].dropdown_toggle("python")),
+	Key([mod], "o", lazy.group["SPD"].dropdown_toggle("ranger")),
+        Key([mod, "shift"], 'e', lazy.spawn(myTerm + ' -e ' + myEditor + ' ' + myConfig)),
         Key([], 'F7', lazy.spawn('xset dpms force off')),
         Key([], 'XF86MonBrightnessUp',   lazy.function(backlight('inc'))),
         Key([], 'XF86MonBrightnessDown', lazy.function(backlight('dec'))),
         Key([], 'XF86AudioMute', lazy.spawn('ponymix toggle')),
         Key([], 'XF86AudioRaiseVolume', lazy.spawn('ponymix increase 5')),
         Key([], 'XF86AudioLowerVolume', lazy.spawn('ponymix decrease 5')),
-         Key([mod], "Return",
+        Key([mod], "Return",
              lazy.spawn(myTerm + " -e fish"),
              desc='Launches My Terminal'
              ),
@@ -52,7 +70,7 @@ keys = [
              lazy.next_layout(),
              desc='Toggle through layouts'
              ),
-         Key([mod, "shift"], "c",
+         Key([mod, "shift"], "q",
              lazy.window.kill(),
              desc='Kill active window'
              ),
@@ -60,7 +78,7 @@ keys = [
              lazy.restart(),
              desc='Restart Qtile'
              ),
-         Key([mod, "shift"], "q",
+         Key([mod, "shift"], "x",
              lazy.shutdown(),
              desc='Shutdown Qtile'
              ),
@@ -68,38 +86,12 @@ keys = [
              lazy.spawn('betterlockscreen -s dimblur'),
              desc='Suspend Qtile'
              ),
-         Key(["control", "shift"], "e",
-             lazy.spawn("emacsclient -c -a emacs"),
-             desc='Doom Emacs'
-             ),
-         Key([mod], "w",
+        Key([mod], "w",
              lazy.spawn("firefox"),
              desc='Firefox'
              ),
          Key([mod], "z",
              lazy.hide_show_bar("top")
-             ),
-         ### Switch focus to specific monitor (out of three)
-         ### Key([mod], "w",
-         ###     lazy.to_screen(0),
-         ###     desc='Keyboard focus to monitor 1'
-         ###     ),
-         Key([mod], "e",
-             lazy.to_screen(1),
-             desc='Keyboard focus to monitor 2'
-             ),
-         Key([mod], "r",
-             lazy.to_screen(2),
-             desc='Keyboard focus to monitor 3'
-             ),
-         ### Switch focus of monitors
-         Key([mod], "period",
-             lazy.next_screen(),
-             desc='Move focus to next monitor'
-             ),
-         Key([mod], "comma",
-             lazy.prev_screen(),
-             desc='Move focus to prev monitor'
              ),
          ### Treetab controls
          Key([mod, "control"], "k",
@@ -149,7 +141,11 @@ keys = [
              lazy.window.toggle_floating(),
              desc='toggle floating'
              ),
-         Key([mod, "shift"], "m",
+         Key([], "F11",
+             lazy.window.toggle_fullscreen(),
+             desc='toggle fullscreen'
+             ),
+	Key([mod], "F11",
              lazy.window.toggle_fullscreen(),
              desc='toggle fullscreen'
              ),
@@ -167,85 +163,8 @@ keys = [
              lazy.layout.toggle_split(),
              desc='Toggle between split and unsplit sides of stack'
              ),
-         ### Dmenu scripts launched with ALT + CTRL + KEY
-         Key(["mod1", "control"], "e",
-             lazy.spawn("./.dmenu/dmenu-edit-configs.sh"),
-             desc='Dmenu script for editing config files'
-             ),
-         Key(["mod1", "control"], "m",
-             lazy.spawn("./.dmenu/dmenu-sysmon.sh"),
-             desc='Dmenu system monitor script'
-             ),
-         Key(["mod1", "control"], "p",
-             lazy.spawn("passmenu"),
-             desc='Passmenu'
-             ),
-         Key(["mod1", "control"], "r",
-             lazy.spawn("./.dmenu/dmenu-reddio.sh"),
-             desc='Dmenu reddio script'
-             ),
-         Key(["mod1", "control"], "s",
-             lazy.spawn("./.dmenu/dmenu-surfraw.sh"),
-             desc='Dmenu surfraw script'
-             ),
-         Key(["mod1", "control"], "t",
-             lazy.spawn("./.dmenu/dmenu-trading.sh"),
-             desc='Dmenu trading programs script'
-             ),
-         Key(["mod1", "control"], "i",
-             lazy.spawn("./.dmenu/dmenu-scrot.sh"),
-             desc='Dmenu scrot script'
-             ),
          ### My applications launched with SUPER + ALT + KEY
-         Key([mod, "mod1"], "b",
-             lazy.spawn("tabbed -r 2 surf -pe x '.surf/html/homepage.html'"),
-             desc='lynx browser'
-             ),
-         Key([mod, "mod1"], "l",
-                 lazy.spawn(myTerm+" -e lynx http://google.com"),
-                desc='lynx browser'
-             ),
-         Key([mod, "mod1"], "n",
-             lazy.spawn(myTerm+" -e newsboat"),
-             desc='newsboat'
-             ),
-         Key([mod, "mod1"], "r",
-             lazy.spawn(myTerm+" -e rtv"),
-             desc='reddit terminal viewer'
-             ),
-         Key([mod, "mod1"], "e",
-             lazy.spawn(myTerm+" -e neomutt"),
-             desc='neomutt'
-             ),
-         Key([mod, "mod1"], "m",
-             lazy.spawn(myTerm+" -e sh ./scripts/toot.sh"),
-             desc='toot mastodon cli'
-             ),
-         Key([mod, "mod1"], "t",
-             lazy.spawn(myTerm+" -e sh ./scripts/tig-script.sh"),
-             desc='tig'
-             ),
-         Key([mod, "mod1"], "f",
-             lazy.spawn(myTerm+" -e sh ./.config/vifm/scripts/vifmrun"),
-             desc='vifm'
-             ),
-         Key([mod, "mod1"], "j",
-             lazy.spawn(myTerm+" -e joplin"),
-             desc='joplin'
-             ),
-         Key([mod, "mod1"], "c",
-             lazy.spawn(myTerm+" -e cmus"),
-             desc='cmus'
-             ),
-         Key([mod, "mod1"], "i",
-             lazy.spawn(myTerm+" -e irssi"),
-             desc='irssi'
-             ),
-         Key([mod, "mod1"], "y",
-             lazy.spawn(myTerm+" -e youtube-viewer"),
-             desc='youtube-viewer'
-             ),
-         Key([mod, "mod1"], "a",
+         Key([mod ], "a",
              lazy.spawn(myTerm+" -e pulsemixer"),
              desc='pulsemixer'
              ),
@@ -290,10 +209,10 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 layout_theme = {
-                "border_width": 4,
-                "margin": 6,
-                "border_focus": colors[0],
-                "border_normal": colors[-1]
+                "border_width": 3,
+                "margin": 10,
+                "border_focus": special["foreground"],
+                "border_normal": special["background"]
                 }
 
 layouts = [
@@ -314,11 +233,11 @@ layouts = [
          fontsize = 13,
          sections = ["FIRST", "SECOND"],
          section_fontsize = 12,
-         bg_color = "141414",
-         active_bg = "90C435",
-         active_fg = "000000",
-         inactive_bg = "384323",
-         inactive_fg = "a0a0a0",
+         bg_color = special["background"][1:],
+         active_bg = colors[0][1:],
+         active_fg = colors[1][1:],
+         inactive_bg = colors[-1][1:],
+         inactive_fg = colors[-2][1:],
          padding_y = 5,
          section_top = 10,
          panel_width = 320
@@ -341,7 +260,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
-    font="Caskaydia Cove Nerd Font Mono",
+    font="San Francisco Pro",
     fontsize = 16,
     padding = 6,
     background=special["background"],
@@ -351,13 +270,7 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-              #widget.TextBox(
-              #         text=u'\uf1b6',
-              #         fontsize = 32,
-              #         background = colors[6],
-              #         mouse_callbacks = {'Button1': lambda qtile: lazy.spawn('firefox')},
-              #        ),
-              widget.Clock(
+    	      widget.Clock(
                        foreground = get_text_color(colors[6]),
                        background = colors[6],
                        format = " %H:%M ",
@@ -382,8 +295,8 @@ def init_widgets_list():
                        padding_y = 6,
                        padding_x = 6,
                        borderwidth = 3,
-                       active = colors[1],
-                       inactive = colors[4],
+                       active = colors[5],
+                       inactive = colors[6],
                        rounded = False,
                        highlight_color = colors[-1],
                        highlight_method = "line",
@@ -411,47 +324,18 @@ def init_widgets_list():
                        linewidth = 0,
                        foreground = colors[2],
                        ),
-              widget.TextBox(
-                       text = u'\ue0ba',
-                       foreground = colors[1],
-                       fontsize = 32,
-                       padding=0
-                       ),
-              widget.Systray(
-                       background = colors[1],
-                       padding = 5
-                       ),
-              widget.TextBox(
-                       text = u'\ufaa8',
-                       foreground = colors[6],
-                       fontsize = 24,
-                       background = colors[1],
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e nmtui-connect')},
-                       ),
-              widget.TextBox(
-                       text = u'\uf293',
-                       foreground = colors[6],
-                       fontsize = 24,
-                       background = colors[1],
-                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('bluedevil-wizard')},
-                       ),
-              #widget.Wlan(
-              #          interface="wlp2s0",
-              #          background = colors[1],
-              #          mouse_callbacks = {'Button1': lambda qtile: lazy.spawn(myTerm + ' -e nmtui-connect')},
-              #        ),
-              widget.TextBox(
-                       text = u'\ue0bc',
-                       foreground = colors[1],
-                       background = colors[2],
-                       fontsize = 32,
-                       padding=0
+	      widget.TextBox(
+                       text = u'\ue0c7',
+                       fontsize = 34,
+		       foreground = colors[1],
+		       padding=0
                        ),
               widget.TextBox(
                        text = '🌀',
-                       background = colors[2],
+                       background = colors[1],
                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e yay -Syu')},
-                       fontsize = 22
+                       fontsize = 22,
+		       foreground = get_text_color(colors[1])
                        ),
               widget.CheckUpdates(
                        update_interval = 1800,
@@ -464,13 +348,31 @@ def init_widgets_list():
                        foreground = get_text_color(colors[2])
                        ),
               widget.TextBox(
-                       text = u'\ue0ba',
-                       foreground = colors[3],
-                       background = colors[2],
-                       fontsize = 32,
+                       text = u'\ue0c7',
+                       foreground = colors[2],
+                       background = colors[1],
+                       fontsize = 34,
                        padding=0
                        ),
-              widget.Battery(
+              widget.Volume(
+                       emoji=True,
+                       foreground = get_text_color(colors[2]),
+                       background = colors[2],
+                       padding = 5,
+                      ),
+             widget.Volume(
+                       foreground = get_text_color(colors[2]),
+                       background = colors[2],
+                       padding = 5,
+                      ),
+	     widget.TextBox(
+                       text = u'\ue0c7',
+                       foreground = colors[3],
+                       background = colors[2],
+                       fontsize = 34,
+                       padding=0
+                       ),
+             widget.Battery(
                        format='{char}{percent:2.0%} {hour:d}:{min:02d}',
                        charge_char="🔌",
                        discharge_char="🔋",
@@ -481,13 +383,13 @@ def init_widgets_list():
                        background = colors[3]
                        ),
               widget.TextBox(
-                       text = "\ue0ba",
+                       text = "\ue0c7",
                        foreground = colors[4],
                        background = colors[3],
-                       fontsize = 28,
+                       fontsize = 34,
                        padding=0
                        ),
-              widget.TextBox(
+	      widget.TextBox(
                         text="👾",
                         foreground = colors[2],
                         background = colors[4],
@@ -499,30 +401,49 @@ def init_widgets_list():
                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop')},
                        padding = 5
                        ),
-              widget.TextBox(
-                       text = "\ue0ba",
+	      widget.TextBox(
+                       text = "\ue0c7",
                        foreground = colors[5],
                        background = colors[4],
-                       fontsize = 28,
+                       fontsize = 34,
                        padding=0
                        ),
+	      #widget.Systray(
+              #         background = colors[1],
+              #         padding = 5
+              #         ),
               widget.TextBox(
-                      text = " Vol:",
+                       text = u'\ufaa8',
                        foreground = get_text_color(colors[5]),
+                       fontsize = 24,
                        background = colors[5],
-                       padding = 0
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e nmtui-connect')},
                        ),
-              widget.Volume(
-                       foreground = get_text_color(colors[5]),
-                       background = colors[5],
-                       padding = 5
+	      widget.Wlan(
+			format =  "{essid} " + "{percent:2.0%}",
+    			interface="wlp2s0",
+                        foreground = get_text_color(colors[5]),
+                        background = colors[5],
+                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e nmtui-connect')},
                        ),
               widget.TextBox(
-                       text = '\ue0ba',
+                       text = u'\uf293',
+                       foreground = get_text_color(colors[5]),
+                       fontsize = 24,
                        background = colors[5],
+                       mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn('blueman-manager')},
+                       ),
+              #widget.Wlan(
+              #          interface="wlp2s0",
+              #          background = colors[1],
+              #          mouse_callbacks = {'Button1': lambda qtile: lazy.spawn(myTerm + ' -e nmtui-connect')},
+              #        ),
+              widget.TextBox(
+                       text = u'\ue0c7',
                        foreground = colors[6],
-                       padding = 0,
-                       fontsize = 37
+                       background = colors[5],
+                       fontsize = 32,
+                       padding=0
                        ),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
@@ -549,7 +470,7 @@ def init_widgets_screen2():
     return widgets_screen2                       # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.85, size=26)),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[5, 5, 0, 5],opacity=0.85, size=34)),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26)),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=26))]
 

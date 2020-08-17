@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/yt/Downloads/wp7098950-the-ghost-of-tsushima-wallpapers.png",
+    "alpha": "100",
+    "special": {
+        "background": "#220c08",
+        "foreground": "#c7c2c1",
+        "cursor": "#c7c2c1"
+    },
+    "colors": {
+        "color0": "#220c08",
+        "color1": "#ad3e29",
+        "color2": "#a9a29e",
+        "color3": "#ab8167",
+        "color4": "#c3b9b0",
+        "color5": "#aa9988",
+        "color6": "#c7c4c1",
+        "color7": "#c7c2c1",
+        "color8": "#594845",
+        "color9": "#ad3e29",
+        "color10": "#a9a29e",
+        "color11": "#ab8167",
+        "color12": "#c3b9b0",
+        "color13": "#aa9988",
+        "color14": "#c7c4c1",
+        "color15": "#c7c2c1"
+    }
+}

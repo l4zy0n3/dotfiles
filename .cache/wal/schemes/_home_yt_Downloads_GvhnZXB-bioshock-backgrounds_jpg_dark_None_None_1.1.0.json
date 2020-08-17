@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/yt/Downloads/GvhnZXB-bioshock-backgrounds.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#15100a",
+        "foreground": "#ccc8bd",
+        "cursor": "#ccc8bd"
+    },
+    "colors": {
+        "color0": "#15100a",
+        "color1": "#75776A",
+        "color2": "#847B60",
+        "color3": "#7E8173",
+        "color4": "#968B69",
+        "color5": "#868779",
+        "color6": "#909385",
+        "color7": "#ccc8bd",
+        "color8": "#8e8c84",
+        "color9": "#75776A",
+        "color10": "#847B60",
+        "color11": "#7E8173",
+        "color12": "#968B69",
+        "color13": "#868779",
+        "color14": "#909385",
+        "color15": "#ccc8bd"
+    }
+}

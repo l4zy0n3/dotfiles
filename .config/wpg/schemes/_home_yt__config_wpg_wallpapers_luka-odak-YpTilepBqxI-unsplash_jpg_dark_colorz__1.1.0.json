@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/luka-odak-YpTilepBqxI-unsplash.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#272321",
+        "foreground": "#fffffd",
+        "cursor": "#fffffd"
+    },
+    "colors": {
+        "color0": "#272321",
+        "color1": "#c5b2a6",
+        "color2": "#c0a488",
+        "color3": "#ae865b",
+        "color4": "#60a9aa",
+        "color5": "#048fab",
+        "color6": "#bdbdc3",
+        "color7": "#c9c8c7",
+        "color8": "#423b37",
+        "color9": "#ffe2c0",
+        "color10": "#ffd59b",
+        "color11": "#f3ae65",
+        "color12": "#6becee",
+        "color13": "#01bce2",
+        "color14": "#dcdcff",
+        "color15": "#fffffd"
+    }
+}

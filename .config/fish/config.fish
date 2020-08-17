@@ -1,4 +1,4 @@
-set SPACEFISH_CHAR_PREFIX '🔥🔥🔥'
+set SPACEFISH_CHAR_PREFIX '🔥🔥🔥 '
 # Load aliases and shortcuts if existent.
 alias shut "sudo openrc-shutdown -p now"
 alias cp "cp -iv"
@@ -9,7 +9,7 @@ alias dl "aria2c -x16"
 alias yt "youtube-dl --add-metadata -i"
 alias yta "yt -x -f bestaudio/best"
 alias ffmpeg "ffmpeg -hide_banner"
-alias vim "vim"
+alias vim "kak"
 alias dmen 'dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
 
 #function fish_greeting
@@ -17,11 +17,16 @@ alias dmen 'dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
 #end
 
 #funcsave fish_greeting
-
+command wal -R -q
 command cat ~/.cache/wal/sequences &
+function apply-wall-dark
+   command wal --saturate="$argv[3]" -n -i "$argv[1]" --backend "$argv[2]"
+   command feh --bg-scale "$argv[1]"
+   command betterlockscreen -u "$argv[1]"
+end
 
-function wall-scale
-   command wal -n -i "$argv[1]" --backend colorz
+function apply-wall-light
+   command wal -l --saturate="$argv[3]" -n -i "$argv[1]" --backend "$argv[2]"
    command feh --bg-scale "$argv[1]"
    command betterlockscreen -u "$argv[1]"
 end
@@ -38,7 +43,6 @@ function mkdir -d "Create a directory and set CWD"
         end
     end
 end
-command wal -R -q
 # [ -f "$XDG_CONFIG_HOME:-$HOME/.config/shortcutrc" ] && source "$XDG_CONFIG_HOME:-$HOME/.config/shortcutrc"
 # [ -f "$XDG_CONFIG_HOME:-$HOME/.config/aliasrc" ] && source "$XDG_CONFIG_HOME:-$HOME/.config/aliasrc"
 # [ -f "$XDG_CONFIG_HOME:-$HOME/.config/zshnameddirrc" ] && source "$XDG_CONFIG_HOME:-$HOME/.config/zshnameddirrc"

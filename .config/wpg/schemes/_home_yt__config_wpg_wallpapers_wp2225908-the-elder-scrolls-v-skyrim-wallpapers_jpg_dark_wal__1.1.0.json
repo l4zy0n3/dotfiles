@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/wp2225908-the-elder-scrolls-v-skyrim-wallpapers.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#dbe1e1",
+        "foreground": "#010101",
+        "cursor": "#010101"
+    },
+    "colors": {
+        "color0": "#dbe1e1",
+        "color1": "#B4C9CD",
+        "color2": "#748C8C",
+        "color3": "#BEC2B9",
+        "color4": "#93A19D",
+        "color5": "#ABB6B2",
+        "color6": "#B1DBEA",
+        "color7": "#0a0c0a",
+        "color8": "#c2c7c7",
+        "color9": "#5ca3b0",
+        "color10": "#3b7878",
+        "color11": "#88a860",
+        "color12": "#4c8b79",
+        "color13": "#599e84",
+        "color14": "#58aac7",
+        "color15": "#010101"
+    }
+}

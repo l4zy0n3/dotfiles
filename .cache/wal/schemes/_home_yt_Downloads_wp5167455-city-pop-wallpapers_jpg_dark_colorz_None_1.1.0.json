@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/yt/Downloads/wp5167455-city-pop-wallpapers.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#262422",
+        "foreground": "#c8c8c7",
+        "cursor": "#c8c8c7"
+    },
+    "colors": {
+        "color0": "#262422",
+        "color1": "#c3b5ae",
+        "color2": "#ad967e",
+        "color3": "#7997ae",
+        "color4": "#1270bc",
+        "color5": "#5682ab",
+        "color6": "#a1a3a6",
+        "color7": "#c8c8c7",
+        "color8": "#5c5a59",
+        "color9": "#c3b5ae",
+        "color10": "#ad967e",
+        "color11": "#7997ae",
+        "color12": "#1270bc",
+        "color13": "#5682ab",
+        "color14": "#a1a3a6",
+        "color15": "#c8c8c7"
+    }
+}

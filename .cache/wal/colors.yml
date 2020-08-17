@@ -1,0 +1,24 @@
+wallpaper: "/home/yt/Downloads/paranoid_android_hampus_olsson_2016_2556x1440.jpg"
+
+special:
+    background: "#0c1d21"
+    foreground: "#c2c6c7"
+    cursor: "#c2c6c7"
+
+colors:
+    color0: "#0c1d21"
+    color1: "#3d94a9"
+    color2: "#3571aa"
+    color3: "#667daa"
+    color4: "#848aa9"
+    color5: "#a096a4"
+    color6: "#aa7a82"
+    color7: "#c2c6c7"
+    color8: "#485558"
+    color9: "#3d94a9"
+    color10: "#3571aa"
+    color11: "#667daa"
+    color12: "#848aa9"
+    color13: "#a096a4"
+    color14: "#aa7a82"
+    color15: "#c2c6c7"

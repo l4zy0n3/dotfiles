@@ -1,0 +1,21 @@
+set $wallpaper /home/yt/Downloads/paranoid_android_hampus_olsson_2016_2556x1440.jpg
+
+set $background #0c1d21
+set $foreground #c2c6c7
+
+set $color0 #0c1d21
+set $color1 #3d94a9
+set $color2 #3571aa
+set $color3 #667daa
+set $color4 #848aa9
+set $color5 #a096a4
+set $color6 #aa7a82
+set $color7 #c2c6c7
+set $color8 #485558
+set $color9 #3d94a9
+set $color10 #3571aa
+set $color11 #667daa
+set $color12 #848aa9
+set $color13 #a096a4
+set $color14 #aa7a82
+set $color15 #c2c6c7

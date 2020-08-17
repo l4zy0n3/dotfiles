@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/eric-jacob-G0miZ5OYaXI-unsplash.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#27241e",
+        "foreground": "#fffffd",
+        "cursor": "#fffffd"
+    },
+    "colors": {
+        "color0": "#27241e",
+        "color1": "#c5b79a",
+        "color2": "#c3af80",
+        "color3": "#aa9453",
+        "color4": "#aba16d",
+        "color5": "#c1bfb1",
+        "color6": "#aaa98e",
+        "color7": "#c9c8c6",
+        "color8": "#433e33",
+        "color9": "#fff5b1",
+        "color10": "#ffeb91",
+        "color11": "#edc85b",
+        "color12": "#f0dd7b",
+        "color13": "#ffffce",
+        "color14": "#f1eea4",
+        "color15": "#fffffd"
+    }
+}

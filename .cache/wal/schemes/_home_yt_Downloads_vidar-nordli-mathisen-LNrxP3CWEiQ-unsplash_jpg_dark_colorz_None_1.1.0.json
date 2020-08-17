@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/yt/Downloads/vidar-nordli-mathisen-LNrxP3CWEiQ-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#211713",
+        "foreground": "#c7c5c4",
+        "cursor": "#c7c5c4"
+    },
+    "colors": {
+        "color0": "#211713",
+        "color1": "#aa7562",
+        "color2": "#ae9a8f",
+        "color3": "#a19810",
+        "color4": "#9aa659",
+        "color5": "#6e89a9",
+        "color6": "#9e9aa7",
+        "color7": "#c7c5c4",
+        "color8": "#58514e",
+        "color9": "#aa7562",
+        "color10": "#ae9a8f",
+        "color11": "#a19810",
+        "color12": "#9aa659",
+        "color13": "#6e89a9",
+        "color14": "#9e9aa7",
+        "color15": "#c7c5c4"
+    }
+}

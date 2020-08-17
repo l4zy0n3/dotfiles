@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/wp2536486-grand-theft-auto-vice-city-wallpapers.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#acbed3",
+        "foreground": "#010101",
+        "cursor": "#010101"
+    },
+    "colors": {
+        "color0": "#acbed3",
+        "color1": "#AC875E",
+        "color2": "#B25DA3",
+        "color3": "#CFB757",
+        "color4": "#3C6287",
+        "color5": "#FC0583",
+        "color6": "#4B6D93",
+        "color7": "#060707",
+        "color8": "#95a5b7",
+        "color9": "#8f5f2a",
+        "color10": "#932981",
+        "color11": "#aa8f23",
+        "color12": "#19446f",
+        "color13": "#b2015b",
+        "color14": "#214b79",
+        "color15": "#010101"
+    }
+}
