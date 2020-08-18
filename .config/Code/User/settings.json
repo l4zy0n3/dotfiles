@@ -3,6 +3,8 @@
     "window.menuBarVisibility": "toggle",
     "editor.fontFamily":  "'JetBrainsMono Nerd Font Mono'",
     "editor.fontSize": 16,
+    "editor.minimap.enabled": false,
+    "workbench.sideBar.location": "right",
     "window.zoomLevel": 1.2,
     "editor.lineHeight": 24,
     "editor.letterSpacing": 0.7,
