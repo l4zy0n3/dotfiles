@@ -15,13 +15,14 @@ alias startjenkins 'docker run -d -v /home/yt/jenkins:/var/jenkins_home -p 8080:
 alias memtop 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
 alias cputop 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'
 alias gdrive 'google-drive-ocamlfuse /home/yt/GoogleDrive/'
-alias add 'git add'
-alias commit 'git commit -m '
-alias push 'git push'
+abbr -a add 'git add'
+abbr -a commit 'git commit -m '
+abbr -a push 'git push'
 
 #function fish_greeting
 #	cowfortune -a
 #end
+#import_bash_aliases
 
 #funcsave fish_greeting
 command wal -R -q
