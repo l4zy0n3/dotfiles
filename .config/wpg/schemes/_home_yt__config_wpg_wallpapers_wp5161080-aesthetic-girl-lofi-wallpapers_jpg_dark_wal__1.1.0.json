@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/wp5161080-aesthetic-girl-lofi-wallpapers.jpg",
+    "alpha": "80",
+
+    "special": {
+        "background": "#0d0c12",
+        "foreground": "#b9b9b6",
+        "cursor": "#b9b9b6"
+    },
+    "colors": {
+        "color0": "#0d0c12",
+        "color1": "#32555F",
+        "color2": "#315562",
+        "color3": "#4B4D56",
+        "color4": "#566065",
+        "color5": "#6E7070",
+        "color6": "#8D7168",
+        "color7": "#b9b9b6",
+        "color8": "#81817f",
+        "color9": "#32555F",
+        "color10": "#315562",
+        "color11": "#4B4D56",
+        "color12": "#566065",
+        "color13": "#6E7070",
+        "color14": "#8D7168",
+        "color15": "#b9b9b6"
+    }
+}

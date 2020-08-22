@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/46519.png",
+    "alpha": "80",
+
+    "special": {
+        "background": "#171717",
+        "foreground": "#c5c5c5",
+        "cursor": "#c5c5c5"
+    },
+    "colors": {
+        "color0": "#171717",
+        "color1": "#363637",
+        "color2": "#4a4a4c",
+        "color3": "#575529",
+        "color4": "#646349",
+        "color5": "#6a6833",
+        "color6": "#9b9842",
+        "color7": "#c5c5c5",
+        "color8": "#515151",
+        "color9": "#363637",
+        "color10": "#4a4a4c",
+        "color11": "#575529",
+        "color12": "#646349",
+        "color13": "#6a6833",
+        "color14": "#9b9842",
+        "color15": "#c5c5c5"
+    }
+}

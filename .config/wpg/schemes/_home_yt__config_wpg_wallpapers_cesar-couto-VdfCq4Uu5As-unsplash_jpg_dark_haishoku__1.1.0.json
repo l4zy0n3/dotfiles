@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/cesar-couto-VdfCq4Uu5As-unsplash.jpg",
+    "alpha": "80",
+    "special": {
+        "background": "#161616",
+        "foreground": "#c4c4c4",
+        "cursor": "#c4c4c4"
+    },
+    "colors": {
+        "color0": "#161616",
+        "color1": "#1b1a2e",
+        "color2": "#1e1d29",
+        "color3": "#221b2e",
+        "color4": "#1e1e33",
+        "color5": "#241f29",
+        "color6": "#27243b",
+        "color7": "#c4c4c4",
+        "color8": "#505050",
+        "color9": "#1b1a2e",
+        "color10": "#1e1d29",
+        "color11": "#221b2e",
+        "color12": "#1e1e33",
+        "color13": "#241f29",
+        "color14": "#27243b",
+        "color15": "#c4c4c4"
+    }
+}

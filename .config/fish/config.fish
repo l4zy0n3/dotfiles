@@ -9,9 +9,12 @@ alias dl "aria2c -x16"
 alias yt "youtube-dl --add-metadata -i"
 alias yta "yt -x -f bestaudio/best"
 alias ffmpeg "ffmpeg -hide_banner"
-alias vim "kak"
+#alias vim "kak"
 alias dmen 'dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
-
+alias startjenkins 'docker run -d -v /home/yt/jenkins:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts'
+alias memtop 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
+alias cputop 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'
+alias gdrive 'google-drive-ocamlfuse /home/yt/GoogleDrive/'
 #function fish_greeting
 #	cowfortune -a
 #end
@@ -19,16 +22,24 @@ alias dmen 'dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
 #funcsave fish_greeting
 command wal -R -q
 command cat ~/.cache/wal/sequences &
+
+function kak
+    /usr/bin/kak "$argv[1]"
+    wal -Rneq
+end
+
 function apply-wall-dark
    command wal --saturate="$argv[3]" -n -i "$argv[1]" --backend "$argv[2]"
    command feh --bg-scale "$argv[1]"
    command betterlockscreen -u "$argv[1]"
+   command reTheme "$argv[1]"
 end
 
 function apply-wall-light
    command wal -l --saturate="$argv[3]" -n -i "$argv[1]" --backend "$argv[2]"
    command feh --bg-scale "$argv[1]"
    command betterlockscreen -u "$argv[1]"
+   command reTheme "$argv[1]"
 end
 
 function mkdir -d "Create a directory and set CWD"

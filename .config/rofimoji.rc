@@ -1,0 +1,4 @@
+insert-with-clipboard = true
+#copy-only
+skin-tone = neutral
+files = [emojis]

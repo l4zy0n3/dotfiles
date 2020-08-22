@@ -12,8 +12,10 @@ with open('/home/yt/.cache/wal/colors.json') as f:
 
 special = all_colors['special']
 colors = set()
+shuffled = []
 for v in all_colors['colors'].values():
     colors.add( v)
+    shuffled.append( v)
 colors = list(colors)
 colors.sort(key=lambda elem: lightness(elem))
 '''

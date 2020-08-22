@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-wpg -rs '21635.jpg' '21635.jpg'
+wpg -rs '99810.jpg' '99810.jpg'

@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/wp2337052-lo-fi-wallpapers.jpg",
+    "alpha": "80",
+
+    "special": {
+        "background": "#050103",
+        "foreground": "#edc7aa",
+        "cursor": "#edc7aa"
+    },
+    "colors": {
+        "color0": "#050103",
+        "color1": "#392D47",
+        "color2": "#942B32",
+        "color3": "#C63D3D",
+        "color4": "#A22D45",
+        "color5": "#AD534A",
+        "color6": "#E15D4F",
+        "color7": "#edc7aa",
+        "color8": "#a58b76",
+        "color9": "#392D47",
+        "color10": "#942B32",
+        "color11": "#C63D3D",
+        "color12": "#A22D45",
+        "color13": "#AD534A",
+        "color14": "#E15D4F",
+        "color15": "#edc7aa"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/wilson-chen-uVLhEIuBiwM-unsplash.jpg",
+    "alpha": "80",
+
+    "special": {
+        "background": "#0F0E0D",
+        "foreground": "#fffbe7",
+        "cursor": "#fffbe7"
+    },
+    "colors": {
+        "color0": "#0F0E0D",
+        "color1": "#B3533C",
+        "color2": "#987466",
+        "color3": "#E8946C",
+        "color4": "#5A7C8F",
+        "color5": "#AE8774",
+        "color6": "#E9AF8C",
+        "color7": "#f5ddcb",
+        "color8": "#292724",
+        "color9": "#f8623e",
+        "color10": "#d68f74",
+        "color11": "#ffb876",
+        "color12": "#65a5c9",
+        "color13": "#f5a983",
+        "color14": "#ffdd9d",
+        "color15": "#fffbe7"
+    }
+}

@@ -20,9 +20,9 @@ configuration {
 	hide-scrollbar: 				true;
 	sidebar-mode: 					false;
 }
-
+/*
 @import "styles/colors.rasi"
-
+*/
 window {
     transparency:                   "real";
     background-color:               @background;

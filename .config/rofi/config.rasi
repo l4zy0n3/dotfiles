@@ -1,7 +1,7 @@
 /** Configured For Applets **/
 
 configuration {
-  theme: "~/.cache/wal/colors-rofi-light";
+  theme: "~/.cache/wal/colors-rofi-dark";
   show-icons:         true;
   icon-theme:         "Papirus";
   location: 4;

@@ -8,6 +8,9 @@ from libqtile.command import lazy
 from libqtile import extension,layout, bar, widget, hook
 from typing import List  # noqa: F401
 from colors import special, colors
+#minimal = False
+minimal = True
+#colors = shuffled
 
 def backlight(action):
     def f(qtile):
@@ -19,22 +22,11 @@ def backlight(action):
                 if (brightness > 49 and action == 'dec') \
                                     or (brightness > 39 and action == 'inc'):
                     subprocess.run(['xbacklight', f'-{action}', '10'])
-                elif (brightness > 49 or (brightness < 39 and brightness > 15)):
+                elif (brightness > 49 or (brightness < 39 and brightness > 25)):
                     subprocess.run(['xbacklight', f'-{action}', '5'])
                 else:
                     subprocess.run(['xbacklight', f'-{action}', '1'])
     return f
-def getVolumeIcon():
-	volume = int(str((subprocess.run(['ponymix', 'get-volume'], stdout=subprocess.PIPE).stdout))[2:-3])
-	isMuted = not bool(subprocess.call(['ponymix', 'is-muted']))
-	if isMuted:
-    		return "🔇"
-	elif volume > 70:
-        	return "🔊"
-	elif volume <= 70 and volume > 35:
-           	return "🔉"
-	else:
-           	return "🔈"
 
 def get_text_color(hex_str):
     hex_str = hex_str[1:]
@@ -47,6 +39,7 @@ myTerm = "alacritty"                             # My terminal of choice
 myConfig = "/home/yt/.config/qtile/config.py"    # The Qtile config file location
 myEditor = "kak"
 keys = [
+	Key([mod], "comma", lazy.spawn("rofimoji")),
 	Key([mod], "d", lazy.spawn("rofi -combi-modi window,drun -show combi -modi combi")),
 	Key([mod], "period", lazy.group["SPD"].dropdown_toggle("terminal")),
 	Key([mod], "p", lazy.group["SPD"].dropdown_toggle("python")),
@@ -62,11 +55,7 @@ keys = [
              lazy.spawn(myTerm + " -e fish"),
              desc='Launches My Terminal'
              ),
-         Key([mod, "shift"], "Return",
-             lazy.spawn("dmenu_run -p 'Run: '"),
-             desc='Dmenu Run Launcher'
-             ),
-         Key([mod], "Tab",
+        Key([mod], "Tab",
              lazy.next_layout(),
              desc='Toggle through layouts'
              ),
@@ -163,10 +152,13 @@ keys = [
              lazy.layout.toggle_split(),
              desc='Toggle between split and unsplit sides of stack'
              ),
-         ### My applications launched with SUPER + ALT + KEY
          Key([mod ], "a",
              lazy.spawn(myTerm+" -e pulsemixer"),
              desc='pulsemixer'
+             ),
+         Key([mod, "shift"], "h",
+	     lazy.spawn(myTerm+" -e htop"),
+             desc='Run HTOP'
              ),
 ]
 
@@ -209,7 +201,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 layout_theme = {
-                "border_width": 3,
+                "border_width": 1,
                 "margin": 10,
                 "border_focus": special["foreground"],
                 "border_normal": special["background"]
@@ -260,8 +252,9 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
-    font="San Francisco Pro",
-    fontsize = 16,
+#    font="San Francisco Pro",
+    font="FantasqueSansMono Nerd Font",
+    fontsize = 18,
     padding = 6,
     background=special["background"],
     foreground=special["foreground"]
@@ -274,10 +267,10 @@ def init_widgets_list():
                        foreground = get_text_color(colors[6]),
                        background = colors[6],
                        format = " %H:%M ",
-                       fontsize = 16
+                       #fontsize = 16
                        ),
               widget.TextBox(
-                       text = u'\ue0bc',
+                       text = u'\ue0c6',
                        foreground = colors[6],
                        fontsize = 32,
                        padding=0
@@ -326,21 +319,22 @@ def init_widgets_list():
                        ),
 	      widget.TextBox(
                        text = u'\ue0c7',
-                       fontsize = 34,
+                       #text = u'\ue0c2',
+		       fontsize = 32,
 		       foreground = colors[1],
-		       padding=0
+		       padding=2
                        ),
               widget.TextBox(
-                       text = '🌀',
+                       text = 'ﮮ' if minimal else '🌀',
                        background = colors[1],
                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e yay -Syu')},
-                       fontsize = 22,
+                       fontsize = 20,
 		       foreground = get_text_color(colors[1])
                        ),
               widget.CheckUpdates(
                        update_interval = 1800,
                        custom_command = 'sudo pacman -Qu',
-                       colour_have_updates = get_text_color(colors[2]),
+                       colour_have_updates = get_text_color(colors[0]),
                        colour_no_updates = get_text_color(colors[2]),
                        display_format = '{updates} Updates',
                        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e yay -Syu')},
@@ -351,49 +345,51 @@ def init_widgets_list():
                        text = u'\ue0c7',
                        foreground = colors[2],
                        background = colors[1],
-                       fontsize = 34,
+                       fontsize = 32,
                        padding=0
                        ),
               widget.Volume(
-                       emoji=True,
+                       emoji= False if minimal else True,
                        foreground = get_text_color(colors[2]),
                        background = colors[2],
                        padding = 5,
-                      ),
-             widget.Volume(
-                       foreground = get_text_color(colors[2]),
-                       background = colors[2],
-                       padding = 5,
-                      ),
+		       fontsize = 24
+	              ),
+             #widget.Volume(
+             #          foreground = get_text_color(colors[2]),
+             #          background = colors[2],
+             #          padding = 5,
+             #         ),
 	     widget.TextBox(
                        text = u'\ue0c7',
                        foreground = colors[3],
                        background = colors[2],
-                       fontsize = 34,
+                       fontsize = 32,
                        padding=0
                        ),
              widget.Battery(
                        format='{char}{percent:2.0%} {hour:d}:{min:02d}',
-                       charge_char="🔌",
-                       discharge_char="🔋",
-                       full_char="👌",
-                       empty_char="❌",
+                       charge_char= u"\uf58a " if minimal else "🔌",
+                       discharge_char= u"\uf578 " if minimal else "🔋",
+                       full_char= u"\uf58b " if minimal else "👌",
+                       empty_char=u"\uf582 " if minimal else "❌",
                        update_interval = 30,
                        foreground = get_text_color(colors[3]),
-                       background = colors[3]
-                       ),
+                       background = colors[3],
+                       fontsize = 20
+		       ),
               widget.TextBox(
                        text = "\ue0c7",
                        foreground = colors[4],
                        background = colors[3],
-                       fontsize = 34,
+                       fontsize = 32,
                        padding=0
                        ),
 	      widget.TextBox(
-                        text="👾",
-                        foreground = colors[2],
+                        text=u"\uf85a " if minimal else "👾",
+                        foreground = get_text_color(colors[4]),
                         background = colors[4],
-                        fontsize = 14
+                        fontsize = 20
                       ),
               widget.Memory(
                        foreground = get_text_color(colors[4]),
@@ -405,7 +401,7 @@ def init_widgets_list():
                        text = "\ue0c7",
                        foreground = colors[5],
                        background = colors[4],
-                       fontsize = 34,
+                       fontsize = 32,
                        padding=0
                        ),
 	      #widget.Systray(
@@ -413,7 +409,7 @@ def init_widgets_list():
               #         padding = 5
               #         ),
               widget.TextBox(
-                       text = u'\ufaa8',
+                       text = u'\ufaa8 ',
                        foreground = get_text_color(colors[5]),
                        fontsize = 24,
                        background = colors[5],
@@ -455,7 +451,7 @@ def init_widgets_list():
               widget.Clock(
                        foreground = get_text_color(colors[6]),
                        background = colors[6],
-                       fontsize = 16,
+                       #fontsize = 16,
                        format = "%A, %B %d "
                        )
               ]
@@ -470,7 +466,7 @@ def init_widgets_screen2():
     return widgets_screen2                       # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[5, 5, 0, 5],opacity=0.85, size=34)),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[5, 5, 0, 5],opacity=0.80, size=34)),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26)),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=26))]
 

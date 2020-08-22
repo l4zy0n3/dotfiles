@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/yt/.config/wpg/wallpapers/wp5809035-anime-lofi-4k-wallpapers.jpg",
+    "alpha": "80",
+
+    "special": {
+        "background": "#050509",
+        "foreground": "#f3eefd",
+        "cursor": "#f3eefd"
+    },
+    "colors": {
+        "color0": "#050509",
+        "color1": "#986548",
+        "color2": "#4C4746",
+        "color3": "#C89F61",
+        "color4": "#60668A",
+        "color5": "#5A5961",
+        "color6": "#2C3247",
+        "color7": "#b8b4c0",
+        "color8": "#15152a",
+        "color9": "#d47f4f",
+        "color10": "#6c5651",
+        "color11": "#ffd26a",
+        "color12": "#6d79c2",
+        "color13": "#6b678a",
+        "color14": "#313c63",
+        "color15": "#f3eefd"
+    }
+}
