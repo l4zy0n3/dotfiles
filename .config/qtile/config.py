@@ -39,8 +39,12 @@ myTerm = "alacritty"                             # My terminal of choice
 myConfig = "/home/yt/.config/qtile/config.py"    # The Qtile config file location
 myEditor = "kak"
 keys = [
+	Key([mod], "y", lazy.screen.prev_group()),
+	Key([mod], "u", lazy.screen.next_group()),
+	Key([mod, "shift"], "Left", lazy.screen.prev_group()),
+	Key([mod, "shift"], "Right", lazy.screen.next_group()),
 	Key([mod], "comma", lazy.spawn("rofimoji")),
-	Key([mod], "d", lazy.spawn("rofi -combi-modi window,drun -show combi -modi combi")),
+	Key([mod], "d", lazy.spawn("rofi -combi-modi window,run -show combi -modi combi")),
 	Key([mod], "period", lazy.group["SPD"].dropdown_toggle("terminal")),
 	Key([mod], "p", lazy.group["SPD"].dropdown_toggle("python")),
 	Key([mod], "o", lazy.group["SPD"].dropdown_toggle("ranger")),
@@ -156,6 +160,10 @@ keys = [
              lazy.spawn(myTerm+" -e pulsemixer"),
              desc='pulsemixer'
              ),
+	Key([mod ], "s",
+             lazy.spawn("spotify"),
+             desc='spotify'
+             ),
          Key([mod, "shift"], "h",
 	     lazy.spawn(myTerm+" -e htop"),
              desc='Run HTOP'
@@ -166,9 +174,9 @@ group_names = [
 	       ("\ue795", {'layout': 'monadtall'}),
                ("\uf269", {'layout': 'monadtall'}),
                ("\ufb0f", {'layout': 'monadtall'}),
+               ("\uf1bc", {'layout': 'monadtall'}),
                ("\uf7c9", {'layout': 'monadtall'}),
                ("\uf308", {'layout': 'monadtall'}),
-               ("\uf1bc", {'layout': 'monadtall'}),
                ("\uf719", {'layout': 'monadtall'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -201,7 +209,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 layout_theme = {
-                "border_width": 1,
+                "border_width": 0,
                 "margin": 10,
                 "border_focus": special["foreground"],
                 "border_normal": special["background"]
@@ -466,7 +474,7 @@ def init_widgets_screen2():
     return widgets_screen2                       # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[5, 5, 0, 5],opacity=0.80, size=34)),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 8, 5, 8],opacity=0.80, size=36)),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=26)),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=26))]
 
