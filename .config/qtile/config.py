@@ -39,6 +39,7 @@ myTerm = "alacritty"                             # My terminal of choice
 myConfig = "/home/yt/.config/qtile/config.py"    # The Qtile config file location
 myEditor = "kak"
 keys = [
+	Key([mod], "v", lazy.spawn(myTerm + " -e cava")),
 	Key([mod], "y", lazy.screen.prev_group()),
 	Key([mod], "u", lazy.screen.next_group()),
 	Key([mod, "shift"], "Left", lazy.screen.prev_group()),
@@ -341,7 +342,7 @@ def init_widgets_list():
                        ),
               widget.CheckUpdates(
                        update_interval = 1800,
-                       custom_command = 'sudo pacman -Qu',
+                       #custom_command = 'sudo pacman -Qu',
                        colour_have_updates = get_text_color(colors[0]),
                        colour_no_updates = get_text_color(colors[2]),
                        display_format = '{updates} Updates',
