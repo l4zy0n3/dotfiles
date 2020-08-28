@@ -1,0 +1,3 @@
+visualizer.spectrum.smoothing.mode=sgs
+visualizer.spectrum.falloff.mode=fill
+colors.scheme=yash,blue

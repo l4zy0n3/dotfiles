@@ -54,7 +54,7 @@ keys = [
         Key([], 'XF86MonBrightnessUp',   lazy.function(backlight('inc'))),
         Key([], 'XF86MonBrightnessDown', lazy.function(backlight('dec'))),
         Key([], 'XF86AudioMute', lazy.spawn('ponymix toggle')),
-        Key([], 'XF86AudioRaiseVolume', lazy.spawn('ponymix increase 5')),
+        Key([], 'XF86AudioRaiseVolume', lazy.spawn('ponymix --max-volume 150 increase 5')),
         Key([], 'XF86AudioLowerVolume', lazy.spawn('ponymix decrease 5')),
         Key([mod], "Return",
              lazy.spawn(myTerm + " -e fish"),
@@ -362,6 +362,8 @@ def init_widgets_list():
                        foreground = get_text_color(colors[2]),
                        background = colors[2],
                        padding = 5,
+                       volume_up_command = 'ponymix --max-volume 150 increase 5',
+                       volume_down_command = 'ponymix decrease 5',
 		       fontsize = 24
 	              ),
              #widget.Volume(

@@ -1,0 +1,12 @@
+{
+    "autoclose": true,
+    "eofnewline": false,
+    "keepautoindent": true,
+    "pluginchannels": [
+        "https://raw.githubusercontent.com/micro-editor/plugin-channel/master/channel.json"
+    ],
+    "pluginrepos": [],
+    "softwrap": true,
+    "termtitle": false,
+    "trimdiff": false
+}

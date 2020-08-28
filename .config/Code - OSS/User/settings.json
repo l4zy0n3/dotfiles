@@ -1,0 +1,17 @@
+{
+    "zenMode.hideLineNumbers": false,
+    "workbench.colorTheme": "Horizon Italic",
+    "window.menuBarVisibility": "toggle",
+    "editor.fontFamily":  "'JetBrainsMono Nerd Font Mono'",
+    "editor.fontSize": 16,
+    "editor.minimap.enabled": false,
+    "workbench.sideBar.location": "right",
+    "window.zoomLevel": 1.2,
+    "editor.lineHeight": 24,
+    "editor.letterSpacing": 0.7,
+    "python.languageServer": "Pylance",
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "kite.showWelcomeNotificationOnStartup": false,
+    "todo-tree.tree.showScanModeButton": false
+}

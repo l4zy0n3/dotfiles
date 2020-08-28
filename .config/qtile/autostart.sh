@@ -9,3 +9,4 @@ albert &
 picom --experimental-backends &
 redshift &
 fusuma &
+pulseeffects --gapplication-service &
